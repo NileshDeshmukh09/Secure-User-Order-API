@@ -1,0 +1,50 @@
+/**
+ *  custom middleware for verifying the request body
+ */
+
+const User = require("../models/user.model");
+
+validateRequest = async (req,res, next) =>{
+
+    //Validate if userName exists
+    if(!req.body.name){
+       console.log(res);
+        return res.status(400).send(
+            "Name is not provided"
+        )
+    }
+
+    //Validate if the userId exists
+    if(!req.body.phoneNumber){
+        return res.status(400).send(
+           "UserID is not provided"
+        )
+    }
+
+   /**
+   * Valiate if the phoneNumber is already not preset
+   */
+    const user = await User.findOne({phoneNumber : req.body.phoneNumber });
+    if(user != null){
+        return res.status(400).send( "phoneNumber already exists" )
+    }
+
+   /** validate the "password" if it Exists */  
+   if( !req.body.password ){
+       return res.status(400).send("Password is not provided")
+   }
+   
+//    /** validate the Password */
+//    const passwordPattern = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/;
+
+//    // message : "Password must have at least 1 upper case, 1 lower case, 1 digit, 1 special characters, and should be 8 characters in length."
+//    if( !passwordPattern.test( req.body.password )){
+//        return res.status(400).send( `Password must have at least - 1 upper case, 1 lower case,  1 digit, 1 special characters,  and should be 8 characters in length.`)
+//    }
+   
+    next(); // give the controll to the controller
+}
+
+module.exports = {
+    validateRequest
+}
