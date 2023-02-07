@@ -42,11 +42,11 @@ validateRequest = async (req, res, next) => {
     }
 
     if (phoneNumber.toString().length !== 10) {
-        res.status(400).send('Phone number must be a number of length 10');
+        return res.status(400).send('Phone number must be a number of length 10');
     }
 
     if (!phoneNumberRegex.test(phoneNumber)) {
-        res.status(400).send('Invalid phone number ');
+        return res.status(400).send('Invalid phone number ');
     }
 
     /**
