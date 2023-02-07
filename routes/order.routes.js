@@ -11,7 +11,7 @@ const router = express.Router();
 router.post("/add-order", [JWTAuth.verifyToken] , orderController.addOrder );
 
 //  /** GET-ORDER - POST */
-router.get("/get-order/:userID",  orderController.getOrderByUserID );
+router.get("/get-order/:userID",  [JWTAuth.verifyToken] ,  orderController.getOrderByUserID );
 
 module.exports = router
    
