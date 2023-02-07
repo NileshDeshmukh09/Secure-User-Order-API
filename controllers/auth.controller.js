@@ -11,6 +11,7 @@ exports.signup = async (req, res) => {
     
     const UserDetailsStoredInDB = {
         name: req.body.name,
+        userID : req.body.userID,
         phoneNumber: req.body.phoneNumber,
         // Hash the password
         password: bcrypt.hashSync(req.body.password, 8),
@@ -28,6 +29,7 @@ exports.signup = async (req, res) => {
         */
         const ResponseOfNewUser = {
             name: newUser.name,
+            userID: newUser.userID,
             phoneNumber: newUser.phoneNumber,
             createdAt: newUser.createdAt,
             updatedAt: newUser.updatedAt
@@ -36,7 +38,7 @@ exports.signup = async (req, res) => {
         console.log(ResponseOfNewUser);
         res.status(201).send({
             success: true,
-            message: `${newUser.name} , Added Successully !`,
+            message: `${newUser.userID} , Added Successully !`,
             user: ResponseOfNewUser
         });
     } catch (err) {
@@ -76,7 +78,8 @@ exports.signin = async (req, res) => {
 
     //** Successfull login */
     //I need to generate access token now
-    const token = jwt.sign({ id : user.phoneNumber }, process.env.SECRET, {
+    console.log( "userID :", user.userID );
+    const token = jwt.sign({ id : user.userID }, process.env.SECRET, {
         expiresIn: '2h'
     });
 
@@ -86,6 +89,7 @@ exports.signin = async (req, res) => {
         message: `${user.name} login Successfully !`,
         user: {
             name: user.name,
+            userID : user.userID,
             phoneNumber: user.phoneNumber,
             accessToken: token
         }

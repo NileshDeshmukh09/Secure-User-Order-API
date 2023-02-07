@@ -24,8 +24,10 @@ mongoose.connect(
 
 
 const authRouter = require('./routes/auth.routes');
+const orderRouter = require('./routes/order.routes');
 
 app.use('/api/v1', authRouter);
+app.use('/api/v1', orderRouter );
 
 
 app.listen(process.env.PORT, () => {

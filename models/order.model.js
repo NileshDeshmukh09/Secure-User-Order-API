@@ -7,19 +7,24 @@ const mongoose = require("mongoose");
 
 const orderSchema = new mongoose.Schema({
 
-    user_id: { 
-        type: [mongoose.SchemaTypes.ObjectId], 
-        required: true, 
-        ref: 'User' 
+    userID : {
+        type: String,
+        required: true,
     },
 
-    sub_total: { 
-        type: Number, 
-        required: true 
-    },
+    sub_total: {
+        type: Number,
+        required: true
+    }, 
 
-    phone_number: { 
-        type: String, 
-        required: true 
-    },
-  });
+    phoneNumber : {
+        type : Number , 
+        required : true
+    }
+
+});
+
+/* These will automatically generates the created and updated fields */
+orderSchema.set('timestamps' , true);
+
+module.exports = mongoose.model("Order", orderSchema);
