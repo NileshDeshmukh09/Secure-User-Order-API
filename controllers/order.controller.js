@@ -42,12 +42,11 @@ exports.getOrderByUserID = async (req, res) => {
  * Controller to fetch the Order based on ID's 
  */
 
-
     const order = await Order.find({
         userID: req.params.userID
     });
 
-    res.status(200).send({
+     return res.status(200).send({
         status: 200,
         message: "Order get successfully !",
         orderDetail: order

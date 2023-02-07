@@ -36,7 +36,7 @@ exports.signup = async (req, res) => {
         }
 
         console.log(ResponseOfNewUser);
-        res.status(201).send({
+         return res.status(201).send({
             success: true,
             message: `${newUser.userID} , Added Successully !`,
             user: ResponseOfNewUser
@@ -44,7 +44,7 @@ exports.signup = async (req, res) => {
     } catch (err) {
 
         console.log(err.message);
-        res.status(500).send({
+        return res.status(500).send({
             message: "Internal Server Error ,when Insert User !"
         })
     }
@@ -84,7 +84,7 @@ exports.signin = async (req, res) => {
     });
 
     //Send the response back 
-    res.status(200).send({
+     return res.status(200).send({
         status : 200,
         message: `${user.name} login Successfully !`,
         user: {
