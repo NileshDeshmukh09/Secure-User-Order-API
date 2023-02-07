@@ -18,7 +18,7 @@ exports.signup = async (req, res) => {
     */
     try {
         const newUser = await User.create(UserDetailsStoredInDB);
-        newUser.save();
+        await newUser.save();
 
         /**
         *  response
