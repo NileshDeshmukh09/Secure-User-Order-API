@@ -8,10 +8,10 @@ const router = express.Router();
 
 
 /** SIGNUP - POST */
-router.post("/auth/signup", [ signupValidation.validateRequest ] , authController.signup);
+router.post("/auth/add-user", [signupValidation.validateRequest] ,  authController.signup);
 
- /** SIGNIN - POST */
-router.post("/auth/signin", authController.signin);
+//  /** SIGNIN - POST */
+router.post("/auth/login-user", authController.signin);
 
 module.exports = router
    

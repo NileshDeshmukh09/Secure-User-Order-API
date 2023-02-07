@@ -15,10 +15,21 @@ validateRequest = async (req,res, next) =>{
     }
 
     //Validate if the userId exists
-    if(!req.body.phoneNumber){
+    const phoneNumber = req.body.phoneNumber;
+    const phoneNumberRegex = /^\d{10}$/;
+
+    if(!phoneNumber ){
         return res.status(400).send(
-           "UserID is not provided"
+           "Phone Number is not provided"
         )
+    }
+
+    if (phoneNumber.toString().length !== 10) {
+        res.status(400).send( 'Phone number must be a number of length 10' );
+      }
+
+    if( !phoneNumberRegex.test( phoneNumber ) ){
+        res.status(400).send( 'Invalid phone number ');
     }
 
    /**
