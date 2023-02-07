@@ -25,7 +25,9 @@ mongoose.connect(
 
 const authRouter = require('./routes/auth.routes');
 const orderRouter = require('./routes/order.routes');
+const homeRouter = require('./routes/home.routes');
 
+app.use( homeRouter );
 app.use('/api/v1', authRouter);
 app.use('/api/v1', orderRouter );
 
